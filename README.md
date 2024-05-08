@@ -6,7 +6,8 @@ This project is to build a SVM model based on AlphaPulldown (https://github.com/
 ## Table of Contents
 
 - [Installation](#installation)
-- [Usage](#usage)
+- [Data](#data)
+- [Model](#model)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -15,7 +16,7 @@ This project is to build a SVM model based on AlphaPulldown (https://github.com/
 This project used AlphaPulldown version 1.0.
 Check Alphapulldown package's pre-installation and installzation part. Harvard FAS has pre-installed alphafold 2 database "/n/holylfs04-ssd2/LABS/FAS/alphafold_database". Make sure if all folders are updated to the newest version (https://github.com/google-deepmind/alphafold). 
 
-## Usage
+## Data
 
 ### Protein pairs collection
 
@@ -91,7 +92,7 @@ sbatch feature_computing_sandbox.sh "/path/outputs/negative_0to100"
 ```
 
 This step runs on CPU. If there are more than 1000 pairs to be calculated, the running time will be too long. Since the script is unable to skip existing pairs, it is recommended that each 1000 pairs should be saved in a seperate folder waiting for feature calculation. To ensure the integrity of the sandbox environment, it's advisable to reconstruct it periodically, especially after prolonged periods of inactivity, as the cleanup process may remove unmodified files.
-
+## Model
 ## Contributing
 
 Outline guidelines for contributing to the project, such as how to report bugs, suggest enhancements, or submit pull requests.
