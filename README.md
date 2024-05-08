@@ -92,6 +92,9 @@ sbatch feature_computing_sandbox.sh "/path/outputs/negative_0to100"
 ```
 
 This step runs on CPU. If there are more than 1000 pairs to be calculated, the running time will be too long. Since the script is unable to skip existing pairs, it is recommended that each 1000 pairs should be saved in a seperate folder waiting for feature calculation. To ensure the integrity of the sandbox environment, it's advisable to reconstruct it periodically, especially after prolonged periods of inactivity, as the cleanup process may remove unmodified files.
+
+Final data is ``full_updated_data.csv``
+
 ## Model
 
 | idx | Features                                         | Kernel  | Model complexity | Test accuracy | Test false positive rate | # support vector | Bootstrap?      |
@@ -105,6 +108,9 @@ This step runs on CPU. If there are more than 1000 pairs to be calculated, the r
 | 7   | 17 features (remove 'iptm_ptm', add 5 'model_x_multimer_v3_pred_0') | linear | 0.1425 | 0.9298 | 0.0155 | 941  | Yes (best)      |
 | 8   | 15 features (remove 'Num intf residues' and 'contact pairs') | linear | 0.1425 | 0.9310 | 0.0156 | 944  | Yes             |
 
+### Feature importance
+
+The least confident model's score becomes the most important feature. 
 
 ## Contributing
 
