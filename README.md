@@ -1,7 +1,7 @@
 # Protein_Heterodimer_SVM
-# Project Name
+# A machine learning model for large-scale discovery of protein interactions with AlphaFold2
 
-Short description or overview of the project.
+This project is to use AlphaPulldown(https://github.com/KosinskiLab/AlphaPulldown).
 
 ## Table of Contents
 
