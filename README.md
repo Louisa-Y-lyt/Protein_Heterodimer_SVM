@@ -19,7 +19,8 @@ Check Alphapulldown package's pre-installation and installzation part. Harvard F
 
 ### Protein pairs collection
 
-The
+The Positive dataset is from PDB bank. The negative dataset is random paifr between Archaea and Homo Sapien (Uniprot). 
+
 ### Multiple sequence alignment (MSA)
 
 ## Contributing
