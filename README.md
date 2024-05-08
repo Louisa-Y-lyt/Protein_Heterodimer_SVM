@@ -93,6 +93,19 @@ sbatch feature_computing_sandbox.sh "/path/outputs/negative_0to100"
 
 This step runs on CPU. If there are more than 1000 pairs to be calculated, the running time will be too long. Since the script is unable to skip existing pairs, it is recommended that each 1000 pairs should be saved in a seperate folder waiting for feature calculation. To ensure the integrity of the sandbox environment, it's advisable to reconstruct it periodically, especially after prolonged periods of inactivity, as the cleanup process may remove unmodified files.
 ## Model
+
+| idx | Features                                         | Kernel  | Model complexity | Test accuracy | Test false positive rate | # support vector | Bootstrap?      |
+|-----|--------------------------------------------------|---------|------------------|---------------|--------------------------|------------------|-----------------|
+| 1   | 10 basic interface features                      | rbf     | 0.2092           | 0.9128        | 0.0337                   | 1382             | No              |
+| 2   | 12 features (add 'iptm_ptm', 'mpDockQ/pDockQ')   | rbf     | 0.1715           | 0.9243        | 0.0169                   | 1133             | No              |
+| 3   | 12 features (add 'iptm_ptm', 'mpDockQ/pDockQ')   | linear  | 0.1577           | 0.9249        | 0.0233                   | 1042             | No              |
+| 4   | 13 features (add 'pi score')                     | rbf     | 0.1676           | 0.9231        | 0.0169                   | 1107             | No              |
+| 5   | 13 features (add 'pi score')                     | linear  | 0.1567           | 0.9237        | 0.0220                   | 1035             | Yes             |
+| 6   | 17 features (remove 'iptm_ptm', add 5 'model_x_multimer_v3_pred_0') | rbf | 0.1523 | 0.9268 | 0.0143 | 1006 | No              |
+| 7   | 17 features (remove 'iptm_ptm', add 5 'model_x_multimer_v3_pred_0') | linear | 0.1425 | 0.9298 | 0.0155 | 941  | Yes (best)      |
+| 8   | 15 features (remove 'Num intf residues' and 'contact pairs') | linear | 0.1425 | 0.9310 | 0.0156 | 944  | Yes             |
+
+
 ## Contributing
 
 Outline guidelines for contributing to the project, such as how to report bugs, suggest enhancements, or submit pull requests.
