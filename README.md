@@ -23,10 +23,18 @@ The Positive dataset is from PDB bank. The negative dataset is random paifr betw
 
 ### Multiple sequence alignment (MSA)
 
-Slurm command to use ``msa.sh`` file is 
+Multiple sequence alignment (MSA) runs on CPUs. Alphapulldown accepts two MSA methods: the default AlphaFold version (slower), and the MMseq2 version (much faster). The accuracy of final prediction models depends on the MSA method chosen here. 
+To run 500 protein sequence (not protein pairs) on Cannon in parallel, use ``msa.sh`` file with the following Slurm command:
+
 ```bash
-sbatch —array= "/n/home10/ytingliu/alphapulldown_new/msa_1.sh" "/n/home10/ytingliu/alphapulldown_new/6000_tn_last1000.fasta" "" "/n/holyscratch01/ramanathan_lab/yuting/outputs/msa”
+sbatch --array=0-500 \
+"/path/msa.sh" \
+"/n/home10/ytingliu/alphapulldown_new/6000_tn_input.fasta" \
+"" \
+"/path/msa_outputs"
 ```
+
+Normally, each MSA job takes ~15 minutes.
 
 ## Contributing
 
