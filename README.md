@@ -23,7 +23,7 @@ The Positive dataset is from PDB bank. The negative dataset is random paifr betw
 
 ### Multiple sequence alignment (MSA)
 
-Slurm command to <span style="background-color: #f0f0f0;">msa.sh</span> file is 
+Slurm command to use ``msa.sh`` file is 
 ```bash
 sbatch —array= "/n/home10/ytingliu/alphapulldown_new/msa_1.sh" "/n/home10/ytingliu/alphapulldown_new/6000_tn_last1000.fasta" "" "/n/holyscratch01/ramanathan_lab/yuting/outputs/msa”
 ```
