@@ -29,12 +29,36 @@ To run 500 protein sequence (not protein pairs) on Cannon in parallel, use ``msa
 ```bash
 sbatch --array=0-500 \
 "/path/msa.sh" \
-"/n/home10/ytingliu/alphapulldown_new/6000_tn_input.fasta" \
-"" \
+"/path/6000_tn_input.fasta" \
+"" \ # Default usage of Harvard FAS Alphafold database
 "/path/msa_outputs"
 ```
 
 Normally, each MSA job takes ~15 minutes.
+
+### Predict structures
+
+Prediction step runs on GPU. To run 500 protein pairs (not protein sequences) on Cannon in parallel, use ``prediction.sh`` file with the following Slurm command:
+
+```bash
+sbatch --array=0-500 \
+"/path/prediction.sh" \
+"" \ Default custom mode
+"/path/outputs/negative_0to500" \
+"" \ # Default usage of Harvard FAS Alphafold database
+"/path/6000_tn_pairs.txt"
+"/path/msa_outputs"
+```
+
+Do not submit too many jobs at one time if finishing all jobs takes more than 5 hours. 
+
+For each protein pair there will be 5 models generated based on different initiation locations. For each model it will take ~5 minutes when running in GPU.
+You could check the usage of GPUs using: 
+``sacct --format=JobID,Jobname,partition,state,time,start,end,elapsed,ReqMem,MaxRss,nnodes,ncpus,nodelist -j <your job ID> --units=G``
+to find the running GPU id.
+Then use the command: ``cd <GPU id>`` and type ``nvtop``. There will be dynamic GPU usage chart. 
+
+If the prediction step does not use GPU even with proper GPU partitions, consider reinstalling the AlphaPulldown.
 
 ## Contributing
 
