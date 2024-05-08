@@ -44,7 +44,7 @@ Prediction step runs on GPU. To run 500 protein pairs (not protein sequences) on
 sbatch --array=0-500 \
 "/path/prediction.sh" \
 "" \ Default custom mode
-"/path/outputs/negative_0to500" \
+"/path/outputs/negative_0to1000" \
 "" \ # Default usage of Harvard FAS Alphafold database
 "/path/6000_tn_pairs.txt"
 "/path/msa_outputs"
@@ -57,11 +57,25 @@ For each protein pair there will be 5 models generated based on different initia
 
 You could check the usage of GPUs using: 
 ``sacct --format=JobID,Jobname,partition,state,time,start,end,elapsed,ReqMem,MaxRss,nnodes,ncpus,nodelist -j <your job ID> --units=G``
-to find the running GPU id.
-
-Then use the command: ``cd <GPU id>`` and type ``nvtop``. There will be dynamic GPU usage chart. 
+to find the running GPU id. Then use the command: ``cd <GPU id>`` and type ``nvtop``. There will be dynamic GPU usage chart. 
 
 If the prediction step does not use GPU even with proper GPU partitions, consider reinstalling the AlphaPulldown.
+
+### Computing the protein interface features
+
+Running the sandbox to write the final interface features into a csv file ``predictions_with_good_interpae.csv``. In the default ``alpha-analysis.sif``, there is a cut-off parameter to filter protein pairs based on PAE (predicted alignment error) values. To save more negative pairs with high PAE values, I manually modified this sigularity image in its sandbox replicate to inactivate the cutt-off filter. You need to replace the former ``/alpha_analysis/app/alpha-analysis/get_good_inter_pae.py`` into my modified version ``get_good_inter_pae.py''. Use the following commmand to generate a sandbox replicate using ``build_sandbox.sh``:
+
+```bash
+sbatch "/path/sandbox_path" "/path/alpha-analysis.sif"
+```
+
+After replacing ``get_good_inter_pae.py`` files, run the following command to compute protein interface features using ``feature_computing_sandbox.sh``.
+
+```bash
+sbatch feature_computing_sandbox.sh "/path/outputs/negative_0to100"
+```
+
+This step runs on CPU. If there are more than 1000 pairs to be calculated, the running time will be too long. Since the script is unable to skip existing pairs, it is recommended that each 1000 pairs should be saved in a seperate folder waiting for feature calculation. 
 
 ## Contributing
 
