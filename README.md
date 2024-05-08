@@ -1,7 +1,7 @@
 # Protein_Heterodimer_SVM
 # A machine learning model for large-scale discovery of protein interactions with AlphaFold2
 
-This project is to use AlphaPulldown(https://github.com/KosinskiLab/AlphaPulldown).
+This project is to build a SVM model based on AlphaPulldown (https://github.com/KosinskiLab/AlphaPulldown) pipeline. This pipeline is based on AlphaFold 2. 
 
 ## Table of Contents
 
@@ -12,11 +12,15 @@ This project is to use AlphaPulldown(https://github.com/KosinskiLab/AlphaPulldow
 
 ## Installation
 
-Provide instructions on how to install or set up the project.
+This project used AlphaPulldown version 1.0.
+Check Alphapulldown package's pre-installation and installzation part. Harvard FAS has pre-installed alphafold 2 database "/n/holylfs04-ssd2/LABS/FAS/alphafold_database". Make sure if all folders are updated to the newest version (https://github.com/google-deepmind/alphafold). 
 
 ## Usage
 
-Explain how to use the project or provide examples of usage.
+### Protein pairs collection
+
+The
+### Multiple sequence alignment (MSA)
 
 ## Contributing
 
