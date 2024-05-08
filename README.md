@@ -63,19 +63,34 @@ If the prediction step does not use GPU even with proper GPU partitions, conside
 
 ### Computing the protein interface features
 
-Running the sandbox to write the final interface features into a csv file ``predictions_with_good_interpae.csv``. In the default ``alpha-analysis.sif``, there is a cut-off parameter to filter protein pairs based on PAE (predicted alignment error) values. To save more negative pairs with high PAE values, I manually modified this sigularity image in its sandbox replicate to inactivate the cutt-off filter. You need to replace the former ``/alpha_analysis/app/alpha-analysis/get_good_inter_pae.py`` into my modified version ``get_good_inter_pae.py''. Use the following commmand to generate a sandbox replicate using ``build_sandbox.sh``:
+Running the sandbox to write the final interface features into a csv file ``predictions_with_good_interpae.csv``. In the default ``alpha-analysis.sif``, there is a cut-off parameter to filter protein pairs based on PAE (predicted alignment error) values. To save more negative pairs with high PAE values, I manually modified this sigularity image in its sandbox replicate to inactivate the cutt-off filter. You need to replace the former ``/alpha_analysis/app/alpha-analysis/get_good_inter_pae.py`` with my modified version ``get_good_inter_pae.py''. Use the following commmand to generate a sandbox replicate using ``build_sandbox.sh``:
 
 ```bash
 sbatch "/path/sandbox_path" "/path/alpha-analysis.sif"
 ```
 
-After replacing ``get_good_inter_pae.py`` files, run the following command to compute protein interface features using ``feature_computing_sandbox.sh``.
+After replacing ``get_good_inter_pae.py`` files, modify the ``feature_computing_sandbox.sh`` by changing the sandbox path:
+
+```bash
+# In the modified sandbox,  the cutoff variable is already inactivated. Therefore just give it an random integer.
+cutoff=50
+bind_path=$1
+singularity exec \
+    --no-home \
+    --bind "$bind_path":/mnt \
+    /path/sandbox_path \ # assign the sandbox directory
+    run_get_good_pae.sh \
+    --output_dir=/mnt \
+    --cutoff=$cutoff
+```
+
+Then run the following command to compute protein interface features using ``feature_computing_sandbox.sh``.
 
 ```bash
 sbatch feature_computing_sandbox.sh "/path/outputs/negative_0to100"
 ```
 
-This step runs on CPU. If there are more than 1000 pairs to be calculated, the running time will be too long. Since the script is unable to skip existing pairs, it is recommended that each 1000 pairs should be saved in a seperate folder waiting for feature calculation. 
+This step runs on CPU. If there are more than 1000 pairs to be calculated, the running time will be too long. Since the script is unable to skip existing pairs, it is recommended that each 1000 pairs should be saved in a seperate folder waiting for feature calculation. To ensure the integrity of the sandbox environment, it's advisable to reconstruct it periodically, especially after prolonged periods of inactivity, as the cleanup process may remove unmodified files.
 
 ## Contributing
 
