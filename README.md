@@ -110,6 +110,8 @@ Final data is ``full_updated_data.csv``
 
 ### Feature importance
 
+![Alt text](image_1.png "Optional title")
+
 The least confident model's score becomes the most important feature. 
 
 ## Contributing
