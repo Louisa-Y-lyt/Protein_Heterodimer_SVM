@@ -114,11 +114,6 @@ Final data is ``full_updated_data.csv``
 
 The least confident model's score becomes the most important feature. 
 
-## Contributing
-
-Outline guidelines for contributing to the project, such as how to report bugs, suggest enhancements, or submit pull requests.
-
 ## License
 
-Specify the license under which the project is distributed. If applicable, include any license-related information or acknowledgments.
-
+This project is licensed under the [MIT License](LICENSE.txt) - see the [LICENSE.txt](LICENSE.txt) file for details.
